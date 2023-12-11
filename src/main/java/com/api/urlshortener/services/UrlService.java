@@ -7,9 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import static com.api.urlshortener.utils.Base62Converter.encodeToBase62;
+import static com.api.urlshortener.utils.IdGenerator.generateSnowflakeId;
 
 @Service
 public class UrlService {
@@ -22,17 +22,17 @@ public class UrlService {
 
     public UrlModel save(UrlDto urlDto){
         UrlModel urlModel = new UrlModel();
-        UUID uuid = UUID.randomUUID();
-        String shortenedUrl = encodeToBase62(uuid.toString());
-        urlModel.setUuid(uuid);
+        String id = generateSnowflakeId();
+        String shortenedUrl = encodeToBase62(id);
+        urlModel.setId(id);
         urlModel.setShortened(shortenedUrl);
         BeanUtils.copyProperties(urlDto, urlModel);
         urlRepository.save(urlModel);
         return urlModel;
     };
 
-    public Optional<UrlModel> findById(UUID uuid){
-        return urlRepository.findById(uuid);
+    public Optional<UrlModel> findById(String id){
+        return urlRepository.findById(id);
     };
 
     public Optional<UrlModel> findByUrl(String url){

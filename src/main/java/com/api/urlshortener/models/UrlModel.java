@@ -3,29 +3,28 @@ package com.api.urlshortener.models;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TB_URL")
 public class UrlModel implements Serializable {
-    private static final long serialVersionUID = 1L;
 
     @Id
-    private UUID uuid;
+    @Column(length = 19)
+    private String id;
     @Column(nullable = false)
     private String url;
-    @Column(nullable = false)
+    @Column(nullable = false,length = 26)
     private String shortened;
 
     public UrlModel() {
     }
 
-    public UUID getUuid() {
-        return uuid;
+    public String getId() {
+        return id;
     }
 
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUrl() {
