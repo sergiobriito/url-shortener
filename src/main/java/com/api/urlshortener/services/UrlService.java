@@ -6,6 +6,7 @@ import com.api.urlshortener.repositories.UrlRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.Optional;
 
 import static com.api.urlshortener.utils.Base62Converter.encodeToBase62;
