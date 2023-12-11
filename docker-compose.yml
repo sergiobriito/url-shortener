@@ -1,0 +1,32 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/url-shortener
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 9337
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: url-shortener
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 9337
+    ports:
+      - "5432:5432"
+
+
+# mvn clean install -DskipTests
+# docker-compose build
+# docker-compose up
