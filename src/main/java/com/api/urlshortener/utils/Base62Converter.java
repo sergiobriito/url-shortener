@@ -6,16 +6,7 @@ public class Base62Converter {
 
     private static final String BASE_62_CHARS = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public static String encodeToBase62(String input) {
-        if (input == null){
-            return "";
-        };
-
-        BigInteger value = BigInteger.ZERO;
-        for (char ch : input.toCharArray()){
-            value = value.multiply(BigInteger.valueOf(256)).add(BigInteger.valueOf(ch));
-        };
-
+    public static String encodeToBase62(BigInteger value) {
         StringBuilder encoded = new StringBuilder();
 
         while (!value.equals(BigInteger.ZERO)) {

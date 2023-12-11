@@ -23,7 +23,7 @@ public class UrlService {
     public UrlModel save(UrlDto urlDto){
         UrlModel urlModel = new UrlModel();
         String id = generateSnowflakeId();
-        String shortenedUrl = encodeToBase62(id);
+        String shortenedUrl = encodeToBase62(new BigInteger(id));
         urlModel.setId(id);
         urlModel.setShortened(shortenedUrl);
         BeanUtils.copyProperties(urlDto, urlModel);
